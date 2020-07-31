@@ -1,0 +1,81 @@
+{% extends 'main.html'%}
+{% block content %}
+<br/>
+    <div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+                    {% if order.getAllItemsIn%}  {# if contextSENT instance معناتو هذا  الانستانس يحمل بيانات ! #}
+                    <th>No. of items</th>
+                        <th>ITEM NAME</th>
+					<th>ITEM PRICE</th>
+
+                    {% endif %}
+
+					<th></th>
+					<th></th>
+{#					<th>Date Created</th>#}
+{#					<th>Date Modified</th>#}
+{#					<th></th>#}
+{#					<th></th>#}
+{#					<th>Update</th>#}
+{#					<th>Remove</th>#}
+				</tr>
+                {% for ordereditem in order.getAllItemsIn %}
+
+                    <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ ordereditem.product.product_name }}</td>
+                    <td>{{ ordereditem.product.price }}</td>
+                    <td><a id="delete1" href="{% url 'delete_item2' ordereditem.id  %}" class="btn btn-danger">Delete</a></td>
+
+                    </tr>
+
+                    {% empty %}   {# يتم استخدامها اذا الانستانس المرسول في الكونتكست فاضي مافيلو شي #}
+                    <tr>
+                    <td>You have no items added </td>
+
+                    </tr>
+                {% endfor %}
+            <tr>
+                {% if order.getCartTotal  %}
+                    <td><strong>Total Price</strong></td>
+                    <td colspan="2">{{ order.getCartTotal }}</td>
+
+                    <td colspan="3"><a id="to-cart" href="{% url 'pay' order.id %}" class="btn btn-primary">PAY</a></td>
+
+
+
+                {% endif %}
+            </tr>
+
+            {% if order %}
+
+                    <tr>
+                        <td><a id="to-cart" href="{% url 'all_products'  %}" class="btn btn-primary" >ALL COURSES</a></td>
+
+                    </tr>
+            {% endif %}
+
+{#                <a id="to-cart" href="{% url 'pay' order.id %}" class="btn btn-primary" >Pay</a>#}
+
+            </table>
+
+                    {% for mes in messages %}
+                        {{ mes }}
+        {% endfor %}
+		</div>
+	</div>
+</div>
+{#    <script>#}
+{#    let delete_a = document.getElementById('delete-1');#}
+{#    function onClickDelete(){#}
+{#        let sureMessage = confirm('Are you sure want to remove it ?');#}
+{#        if (sureMessage)#}
+{#        {#}
+{#            this.setAttribute('href', '{% url 'delete_item2' orde%}')#}
+{#        }#}
+{#    }#}
+{#    </script>#}
+{% endblock %}

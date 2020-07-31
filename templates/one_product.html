@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-md-4 mt-3">
+             <div class="card" >
+              <img src="" class="card-img-top" alt="test">
+              <div class="card-body">
+                <h5 class="card-title">{{ object.name }}</h5>
+                <p class="card-text">{{ object.description }}</p>
+                <p class="card-text">{{ object.price }}</p>
+                <p class="card-text">{{ the_tags }}</p>
+                  <a id="to-cart" href="{% url 'add_to_cart' object.slug %}" class="btn btn-primary" >Add To Cart</a>
+                  <a id="to-cart" href="{% url 'cart'  %}" class="btn btn-primary" >Go To Cart</a>
+                  <a id="to-cart" href="{% url 'remove-item' object.slug %}" class="btn btn-danger" >Remove</a>
+                </div>
+            </div>
+        </div>
+
+
+
+    {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+
+    </div>
+</div>
+
+<script>
+
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+
+{#generating the Box for Post will be dynamic of course by rendering them out#}
+
+        {% for item in object_list %}
+        <div class="col-md-4 mt-3">
+             <div class="card" >
+              <img src="" class="card-img-top" alt="test">
+              <div class="card-body">
+                <h5 class="card-title"><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></h5>
+                <p class="card-text">{{ item.description }}</p>
+                <p class="card-text">{{ item.price }}</p>
+                  <a id="to-cart" href="#" class="btn btn-primary" >Add To Cart</a>
+
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+{% endblock %}

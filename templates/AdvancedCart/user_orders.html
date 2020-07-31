@@ -1,0 +1,45 @@
+
+{% extends 'main.html'%}
+{% block content %}
+<br/>
+    <div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+            {% for each_order in user_purchased_orders %}
+
+			<table class="table table-sm">
+				<tr>
+					<th>ORDER ITEMS</th>
+					<th>Courses Price</th>
+					<th></th>
+					<th></th>
+{#					<th>Date Created</th>#}
+{#					<th>Date Modified</th>#}
+{#					<th></th>#}
+{#					<th></th>#}
+{#					<th>Update</th>#}
+{#					<th>Remove</th>#}
+				</tr>
+                    <tr>
+
+                        {% for each_order_items in each_order.ordered_items.all %}
+
+                                 <td>{{ each_order_items.product }}</td>
+
+                    <td>{{ each_order_items.product.price }}</td>
+
+                <tr/>
+                            {% endfor %}
+
+            </table>
+                <hr/>
+                        {% endfor %}
+
+
+                    {% for mes in messages %}
+                        {{ mes }}
+        {% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}

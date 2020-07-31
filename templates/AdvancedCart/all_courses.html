@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+{% block content %}
+    <br/>
+    {% for instanceORDER in active_order %}
+        {% if instanceORDER.getAllItemsIn %}
+        <a href="{% url 'the_cart' %}" class="small btn btn-primary">{{ cart_icon }}</a>
+        {% endif %}
+
+    {% endfor %}
+    <br/>
+    <br/>
+    <a href="{% url 'my_cart' %}" class="btn btn-primary">كل طلباتي</a>
+<div class="container mt-5">
+    <div class="row">
+
+{#generating the Box for Post will be dynamic of course by rendering them out#}
+        {% for object in products_list %}
+        <div class="col-md-4 mt-3">
+             <div class="card" >
+                 {# once they buy completley i will use  #}
+                 {# button that they own this item and the check will be #}
+                 {# if the object in the userAccount added #}
+                 {# which will be after completing the transaction totally #}
+                 {# we will take the product order and add them its account #}
+
+              <img src="" class="card-img-top" alt="test">
+              <div class="card-body">
+                <h5 class="card-title"><a href="#">{{ object.product_name }}</a></h5>
+                <p class="card-text">{{ object.price }}</p>
+                <p class="card-text"></p>
+                  {% if object in current_order_products %}
+                    <a id="to-cart" href="{% url 'the_cart' %}" class="btn btn-primary" >Go To Cart</a>
+                  {% elif object in student_courses %}
+                          <button id="to-cart" disabled="disabled" class="btn btn-primary" >Already own this course, Watch it </button>
+
+                  {% else %}
+                            <a id="to-cart" href="{% url 'add_cart' object.id %}" class="btn btn-primary" >Add To Cart</a>
+
+                  {% endif %}
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+       {% for messa in messages %}
+                      {{ messa }}
+                      {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
